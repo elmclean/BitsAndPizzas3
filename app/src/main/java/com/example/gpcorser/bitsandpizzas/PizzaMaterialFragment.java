@@ -1,6 +1,7 @@
 package com.example.gpcorser.bitsandpizzas;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -31,6 +32,17 @@ public class PizzaMaterialFragment extends Fragment {
         pizzaRecycler.setAdapter(adapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager (getActivity());
         pizzaRecycler.setLayoutManager(layoutManager);
+
+        adapter.setListener(new CaptionedImageAdapter.Listener() {
+            public void onClick(int position) {
+                Intent intent = new Intent(getActivity(), PizzaDetailActivity.class);
+                intent.putExtra(PizzaDetailActivity.EXTRA_PIZZANO, position);
+                getActivity().startActivity(intent);
+            }
+
+        });
+
+
         return pizzaRecycler;
     }
 
